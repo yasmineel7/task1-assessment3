@@ -12,83 +12,65 @@ import java.util.Scanner;
  */
 public class Example4september {
 
- /**
-     * @param word
+/**
+     * @param num1
+     * @param num2
      * @return 
      */
-    public static String convertCase(String word){
-        String word2 = word.toLowerCase();
-        char firstChar = word2.charAt(0);
-        char firstChar1 = Character.toTitleCase(firstChar);
-        String word3 = firstChar1 + word2.substring(1, word2.length());
-        return word3;
+    public static double calcResult(double num1, double num2){
+    return num1 + num2;
+        
     }
     
-    public static String convertCase(String word, char caseType){
-        
-        switch (caseType){
-             case 'l' -> {
-                 String word1 = word.toLowerCase();
-                 return word1;
-            }
-            case 'L' -> {
-                String word1 = word.toLowerCase();
-                 return word1;
-            }
-            case 'u' -> {
-               String word1 = word.toUpperCase();
-                 return word1;
-            }
-            case 'U' -> {
-                String word1 = word.toUpperCase();
-                 return word1;
-            }
-            case 't' -> {
-                String word2 = word.toLowerCase();
-        char firstChar = word2.charAt(0);
-        char firstChar1 = Character.toTitleCase(firstChar);
-        String word3 = firstChar1 + word2.substring(1, word2.length());
-        return word3;
-            }
-            case 'T' -> {
-                String word2 = word.toLowerCase();
-        char firstChar = word2.charAt(0);
-        char firstChar1 = Character.toTitleCase(firstChar);
-        String word3 = firstChar1 + word2.substring(1, word2.length());
-        return word3;
-            }
+    public static double calcResult(double num1, double num2, char oper) {
+        switch (oper){
+            case '+' -> {
+                return num1 + num2;}
+
+            case '-' -> {
+                return num1 - num2;}
+
+            case '*' -> {
+                return num1 * num2;}
             
-            default -> System.out.println("Error");
-           
-    }
-        return null;
-           
+            case '/' -> {
+                return num1 / num2;}
+
+             default -> {System.out.println("Error");
+            return 0;}
+        }
+        
+      }
+
+    public static double calcResult(String formula){
+    String[] parts = formula.split(" ");
+    Double num1 = Double.valueOf(parts[0]);
+    Double num2 = Double.valueOf(parts[2]);
+    char oper = parts[1].charAt(0);
+        
+    return calcResult(num1, num2, oper);
+    
     }
     public static void main(String[] args) {
         // TODO code application logic here
-         // TODO code application logic here
-        //Create an object scanner
+         //Create a new scanner object
         Scanner input = new Scanner(System.in);
-        
-        //Prompt the user to enter a word
-        System.out.printf("Please enter a word: ");
-        String word = input.nextLine();
-        
-        //Prompt the user to choose a case
-        System.out.println("Please choose the case you want to convert: "); 
-        System.out.println("1. 'l' or 'L'for lowercase");
-        System.out.println("2.'u' or 'U' for uppercase");
-        System.out.println("3. 't' or 'T' for titlecase"); 
-        char caseType = input.next().charAt(0); 
-       
+
+        //Prompt the user to enter the numbers, operator and formula
+        System.out.printf("Please enter two numbers, separated by space: ");
+        double num1 = input.nextDouble(); 
+        double num2 = input.nextDouble();
+        System.out.printf("Please enter the operator (+, -, *, or /): ");
+        char oper = input.next().charAt(0);
+        System.out.printf("Please enter a formula, e.g.: \"3.14 * 2\":  "); input.nextLine();
+        String  formula = input.nextLine(); 
+        input.nextLine();
+  
         //Display the result
-        input.nextLine(); input.nextLine();
-        System.out.printf("%-38s : %s","Original word ", word); 
-        input.nextLine();
-        System.out.printf("%-38s : %s","Calling the first convertCase method", convertCase(word));
-        input.nextLine();
-        System.out.printf("%-38s : %s","Calling the second convertCase method", convertCase(word,caseType)); 
-        input.nextLine();
+        System.out.printf("%-25s : %.2f + %.2f = %.2f%n", "Calling the first method", num1, num2, calcResult(num1,num2));
+        System.out.printf("%-25s : %.2f %c %.2f = %.2f%n", "Calling the second method", num1, oper, num2, calcResult(num1,num2,oper));
+        System.out.printf("%-25s : %s = %.2f%n", "Calling the third method", formula, calcResult(formula));
+
         
     }
 }
